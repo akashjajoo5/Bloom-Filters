@@ -1,10 +1,12 @@
 import java.util.*;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 class BloomFilters {
     public static void main (String args[]) {
         Scanner sc = new Scanner (System.in);
         
-        System.out.println("Enter parameters for Bloom and Counting Bloom Filter:\n");
+        System.out.println("\nEnter parameters for Bloom and Counting Bloom Filter:\n");
         System.out.println("Enter number of entries to be encoded for Bloom/Counting Bloom Filter");
         int numElem = sc.nextInt();
         System.out.println("Enter number of bits in the filter for Bloom/Counting Bloom Filter");
@@ -16,7 +18,7 @@ class BloomFilters {
         System.out.println("Enter number of elements to be added for Counting Bloom Filter");
         int numAdd = sc.nextInt();
 
-        System.out.println("Enter parameters for Coded Bloom Filter:\n");
+        System.out.println("\nEnter parameters for Coded Bloom Filter:\n");
         System.out.println("Enter number of sets");
         int numSets = sc.nextInt();
         System.out.println("Enter number of elements in each set");
@@ -79,8 +81,15 @@ class BloomFilters {
             i++;
         }
 
-        System.out.println("Elements of Set A found after look-up: "+numElem);
-        System.out.println("Elements of Set B found after look-up: "+count);       
+        try {
+            FileWriter file = new FileWriter("bloomf_output.txt");
+            BufferedWriter output = new BufferedWriter(file);
+            output.write("Elements of Set A found after look-up: "+numElem);
+            output.write("\nElements of Set B found after look-up: "+count);
+            output.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }      
     }
 
     public static void countingBloomFilter (int[] bitArray, int[] hash, int numElem, int numRemove, int numAdd) {
@@ -141,7 +150,14 @@ class BloomFilters {
             i++;
         }
 
-        System.out.println("Elements of Set A found after look-up: "+count);
+        try {
+            FileWriter file = new FileWriter("countingbf_output.txt");
+            BufferedWriter output = new BufferedWriter(file);
+            output.write("Elements of Set A found after look-up: "+count);
+            output.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 
     public static void codedBloomFilter(int numSets, int numElemC, int numFilters, int numBitsC, int numHashesC) {
@@ -214,7 +230,14 @@ class BloomFilters {
             }
         }
 
-        System.out.println("Number of elements whose lookup results are correct is "+count);
+        try {
+            FileWriter file = new FileWriter("codedbf_output.txt");
+            BufferedWriter output = new BufferedWriter(file);
+            output.write("Number of elements whose lookup results are correct: "+count);
+            output.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 
     public static int getRandom() {
