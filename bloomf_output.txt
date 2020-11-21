@@ -1,2 +1,2 @@
 Elements of Set A found after look-up: 1000
-Elements of Set B found after look-up: 9
+Elements of Set B found after look-up: 8
